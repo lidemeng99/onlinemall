@@ -1,0 +1,28 @@
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone:  GMT+8
+  flyway:
+    url: jdbc:postgresql://127.0.0.1:5432/onlinemall
+    user: postgres
+    password: 123456
+    driver: org.postgresql.Drive
+    locations: classpath:db/migration # 指定sql文件存放的目录
+    baselineOnMigrate: true
+  datasource: ## 其他参数就不配置了
+    url: jdbc:postgresql://127.0.0.1:5432/onlinemall
+    username: postgres
+    password: 123456
+  jpa:
+#    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+axon:
+  axonserver:
+    enabled: true
+logging:
+  config: classpath:logback-spring.xml
+server:
+  port: 8080

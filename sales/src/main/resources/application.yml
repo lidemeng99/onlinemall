@@ -1,0 +1,37 @@
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone:  GMT+8
+  flyway:
+    url: jdbc:postgresql://127.0.0.1:5432/sales
+    user: postgres
+    password: 123456
+    driver: org.postgresql.Drive
+    locations: classpath:db/migration # 指定sql文件存放的目录
+    baselineOnMigrate: true
+  datasource: ## 其他参数就不配置了
+    url: jdbc:postgresql://127.0.0.1:5432/sales
+    username: postgres
+    password: 123456
+  jpa:
+    show-sql: true
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+axon:
+  axonserver:
+    enabled: true
+    servers: 127.0.0.1
+wx:
+  mp:
+    appId: wx958544ec24fb775c
+    secret: bc732e65c553a6f1f805b18471a83d38
+logging:
+  config: classpath:logback-spring.xml
+server:
+  port: 8080
+  servlet:
+    context-path: /sales
+api:
+  stockDeduction: http://localhost:8000/product-api/api/product/{1}/stock/deduction

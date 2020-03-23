@@ -1,0 +1,5 @@
+rootProject.name = 'onlinemall'
+
+include('core','product')
+include 'sales'
+
