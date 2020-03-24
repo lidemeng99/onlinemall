@@ -1,29 +1,29 @@
 version: '3.4'
 services:
-  # postgresql:
-  #   image: postgres:9.6
-  #   container_name: onlinemall-db
-  #   ports: 
-  #     - "5432:5432"
-  #   environment: 
-  #     POSTGRES_PASSWORD: 123456
-  #   volumes: 
-  #     - ./data/db:/var/lib/postgresql/data
-  #   restart: always
-#  axonserver:
-#    build:
-#      context: axonserver
-#      dockerfile: Dockerfile
-#    container_name: onlinemall-axonserver
-#    ports:
-#      - "8024:8024"
-#      - "8124:8124"
-#    environment:
-#      AXONIQ_AXONSERVER_EVENT_STORAGE: /data
-#      AXONIQ_AXONSERVER_SNAPSHOT_STORAGE: /data
-#    volumes:
-#      - ./data:/data
-#    restart: always
+  postgresql:
+    image: postgres:9.6
+    container_name: onlinemall-db
+    ports: 
+      - "5432:5432"
+    environment: 
+      POSTGRES_PASSWORD: 123456
+    volumes: 
+      - /data/dbdata:/var/lib/postgresql/data
+    restart: always
+  axonserver:
+   build:
+     context: axon-server
+     dockerfile: Dockerfile
+   container_name: onlinemall-axonserver
+   ports:
+     - "8024:8024"
+     - "8124:8124"
+   environment:
+     AXONIQ_AXONSERVER_EVENT_STORAGE: /data
+     AXONIQ_AXONSERVER_SNAPSHOT_STORAGE: /data
+   volumes:
+     - /data/axondata:/data
+   restart: always
   product:
     build:
       context: product

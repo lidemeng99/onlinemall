@@ -3,14 +3,14 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone:  GMT+8
   flyway:
-    url: jdbc:postgresql://postgres:5432/sales
+    url: jdbc:postgresql://onlinemall-db:5432/sales
     user: postgres
     password: 123456
     driver: org.postgresql.Drive
     locations: classpath:db/migration # 指定sql文件存放的目录
     baselineOnMigrate: true
   datasource: ## 其他参数就不配置了
-    url: jdbc:postgresql://postgres:5432/sales
+    url: jdbc:postgresql://onlinemall-db:5432/sales
     username: postgres
     password: 123456
   jpa:
