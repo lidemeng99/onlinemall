@@ -1,9 +1,9 @@
 #!/bin/bash
 #
  cd ././../product/
- ./gradlew build
+ gradle build -x test
  cd ././../sales/
- ./gradlew build
+ gradle build -x test
  cd ../docker
 sudo docker-compose down
 sudo docker-compose build
