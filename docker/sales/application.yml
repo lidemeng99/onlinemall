@@ -25,7 +25,7 @@ wx:
 axon:
   axonserver:
     enabled: true
-    servers: axonserver
+    servers: onlinemall-axonserver
 logging:
   config: classpath:logback-spring.xml
 server:
