@@ -22,8 +22,11 @@ import com.amazonaws.services.securitytoken.model.Credentials;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import org.apache.http.client.utils.DateUtils;
+
 
 import static com.amazonaws.SDKGlobalConfiguration.*;
 
@@ -72,9 +75,13 @@ public class S3Storage {
     try {
       //上传文件
       s3.putObject(new PutObjectRequest(bucketName, remoteFileName, tempFile).withCannedAcl(CannedAccessControlList.PublicRead));
-      //获取一个request
+      //获取一个request8
+      Date expiration = new Date();
+      long expirationMillis = expiration.getTime();
+      expirationMillis += 1000L *60*60*24*7;
+      expiration.setTime(expirationMillis);
       GeneratePresignedUrlRequest urlRequest = new GeneratePresignedUrlRequest(
-          bucketName, remoteFileName);
+          bucketName, remoteFileName).withExpiration(expiration);
       //生成公用的url
       URL url = s3.generatePresignedUrl(urlRequest);
       System.out.println("=========URL=================" + url + "============URL=============");
