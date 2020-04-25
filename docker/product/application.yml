@@ -11,6 +11,7 @@ spring:
     baselineOnMigrate: true
   datasource: ## 其他参数就不配置了
     url: jdbc:mysql://rm-2ze193v2lpi386v8j1o.mysql.rds.aliyuncs.com:3306/product
+    driver: com.mysql.jdbc.Driver
     username: dbadmin
     password: P@ssw0rd
   jpa:
