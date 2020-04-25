@@ -45,6 +45,7 @@ services:
     container_name: onlinemall-proxy
     ports:
     - "80:80"
+    - "443:443"
     volumes: 
       - ./log:/var/log/nginx
       - ./conf.d:/etc/nginx/conf.d
