@@ -28,6 +28,7 @@ dependencies {
     compile group: 'com.github.binarywang', name: 'weixin-java-miniapp', version: '3.7.0'
     implementation 'org.flywaydb:flyway-core'
     implementation 'org.postgresql:postgresql:42.2.10'
+    implementation 'mysql:mysql-connector-java:8.0.19'
     testCompile group: 'org.axonframework', name: 'axon-test', version: '4.3'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

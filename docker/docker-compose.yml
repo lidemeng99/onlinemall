@@ -1,15 +1,15 @@
 version: '3.4'
 services:
-  postgresql:
-    image: postgres:9.6
-    container_name: onlinemall-db
-    ports: 
-      - "5432:5432"
-    environment: 
-      POSTGRES_PASSWORD: 123456
-    volumes: 
-      - /data/dbdata:/var/lib/postgresql/data
-    restart: always
+  # postgresql:
+  #   image: postgres:9.6
+  #   container_name: onlinemall-db
+  #   ports: 
+  #     - "5432:5432"
+  #   environment: 
+  #     POSTGRES_PASSWORD: 123456
+  #   volumes: 
+  #     - /data/dbdata:/var/lib/postgresql/data
+  #   restart: always
   axonserver:
    build:
      context: axon-server
@@ -23,19 +23,23 @@ services:
      AXONIQ_AXONSERVER_SNAPSHOT_STORAGE: /data
    volumes:
      - /data/axondata:/data
-   restart: always
+   restart: on-failure
   product:
     build:
       context: product
       dockerfile: Dockerfile
     container_name: onlinemall-product
     restart: always
+    depends_on:
+      - axonserver
   sales:
     build:
       context: sales
       dockerfile: Dockerfile
     container_name: onlinemall-sales
     restart: always
+    depends_on:
+      - axonserver
   nginx:
     image: nginx
     container_name: onlinemall-proxy
@@ -45,9 +49,9 @@ services:
       - ./log:/var/log/nginx
       - ./conf.d:/etc/nginx/conf.d
     restart: always
-#    depends_on:
-#      - sales
-#      - product
+    depends_on:
+      - sales
+      - product
 networks:
   default:
     external:

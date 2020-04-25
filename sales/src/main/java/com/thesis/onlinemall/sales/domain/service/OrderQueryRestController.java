@@ -13,6 +13,7 @@ import com.thesis.onlinemall.sales.infrastructure.entity.TShipping;
 import com.thesis.onlinemall.sales.infrastructure.repository.OrderItemRepository;
 import com.thesis.onlinemall.sales.infrastructure.repository.OrderRepository;
 import com.thesis.onlinemall.sales.infrastructure.repository.ShippingRepository;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,12 +59,14 @@ public class OrderQueryRestController {
       //load order items
       List<TOrderProduct> itemPersistents = orderItemRepository
           .findAllItemsByOrder(item.getOrderid());
+      BigDecimal payment = order.getPayment();
       itemPersistents.forEach(subitem -> {
         OrderItem orderItem = new OrderItem();
         BeanUtils.copyProperties(subitem, orderItem);
         order.addOrderItem(orderItem);
       });
-
+      order.setPayment(payment);
+      order.setTotalamount(payment.add(order.getPostage()));
       System.out.println(order.toString());
       orders.add(order);
     });
@@ -113,6 +116,7 @@ public class OrderQueryRestController {
       BeanUtils.copyProperties(tShippingOptional.get(), shipping);
       order.setShipping(shipping);
     }
+    BigDecimal payment = order.getPayment();
     List<TOrderProduct> itemPersistents = orderItemRepository
         .findAllItemsByOrder(order.getOrderid());
     itemPersistents.forEach(subitem -> {
@@ -120,6 +124,8 @@ public class OrderQueryRestController {
       BeanUtils.copyProperties(subitem, orderItem);
       order.addOrderItem(orderItem);
     });
+    order.setPayment(payment);
+    order.setTotalamount(payment.add(order.getPostage()));
 
     return order;
   }

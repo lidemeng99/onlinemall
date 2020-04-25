@@ -7,12 +7,19 @@ spring:
     user: postgres
     password: 123456
     driver: org.postgresql.Drive
+    url: jdbc:mysql://rm-2ze193v2lpi386v8j1o.mysql.rds.aliyuncs.com:3306/product
+    user: dbadmin
+    password: P@ssw0rd
+    driver: com.mysql.jdbc.Driver
     locations: classpath:db/migration # 指定sql文件存放的目录
     baselineOnMigrate: true
   datasource: ## 其他参数就不配置了
     url: jdbc:postgresql://onlinemall-db:5432/onlinemall
     username: postgres
     password: 123456
+    url: jdbc:mysql://rm-2ze193v2lpi386v8j1o.mysql.rds.aliyuncs.com:3306/product
+    username: dbadmin
+    password: P@ssw0rd
   jpa:
     show-sql: true
     generate-ddl: true
@@ -21,7 +28,6 @@ spring:
 axon:
   axonserver:
     enabled: true
-    servers: onlinemall-axonserver
 logging:
   config: classpath:logback-spring.xml
 server:
